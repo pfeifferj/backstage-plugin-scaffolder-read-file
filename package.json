@@ -24,7 +24,8 @@
   },
   "dependencies": {
     "@backstage/backend-common": "workspace:^",
-    "@backstage/backend-plugin-api": "workspace:^"
+    "@backstage/backend-plugin-api": "workspace:^",
+    "@backstage/plugin-scaffolder-backend": "^1.20.0"
   },
   "devDependencies": {
     "@backstage/backend-test-utils": "workspace:^",

@@ -15,9 +15,9 @@
  */
 
 /**
- * The read-file-backend backend module for the backstage-plugin-scaffolder-read-file-backend plugin.
+ * The read-file-backend backend module for the read-file-backend plugin.
  *
  * @packageDocumentation
  */
 
-export { backstagePluginScaffolderReadFileBackendModuleReadFileBackend } from './module';
+export * from './actions/read-file';
