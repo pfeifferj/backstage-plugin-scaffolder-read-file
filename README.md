@@ -22,10 +22,7 @@ import {
 } from '@backstage/plugin-scaffolder-backend';
 import { Router } from 'express';
 import type { PluginEnvironment } from '../types';
-import {
-	deployKubernetesAction,
-	templateAndValidateKubernetesAction,
-} from '@pfeifferj/plugin-scaffolder-backend-module-read-file'; // here
+import { readFileAction } from '@pfeifferj/plugin-scaffolder-backend-module-read-file'; // here
 import { ScmIntegrations } from '@backstage/integration';
 import { createConfluenceToMarkdownAction } from '@backstage/plugin-scaffolder-backend-module-confluence-to-markdown';
 ```
