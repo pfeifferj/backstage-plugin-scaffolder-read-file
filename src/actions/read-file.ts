@@ -21,7 +21,11 @@ export const readFileAction = createTemplateAction<{ path: string }>({
 			const content = await fs.readFile(ctx.input.path, 'utf8');
 			ctx.output('content', content);
 		} catch (error) {
-			throw new Error(`Failed to read file: ${error.message}`);
+			if (error instanceof Error) {
+				throw new Error(`Failed to read file: ${error.message}`);
+			} else {
+				throw new Error('Failed to read file: An unknown error occurred');
+			}
 		}
 	},
 });
