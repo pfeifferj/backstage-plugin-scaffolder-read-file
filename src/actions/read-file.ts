@@ -24,6 +24,14 @@ export const readFileAction = () => {
 				},
 				required: ['filename'],
 			},
+			output: {
+				type: 'object',
+				properties: {
+					content: {
+						type: 'string',
+					},
+				},
+			},
 		},
 		async handler(ctx) {
 			try {
