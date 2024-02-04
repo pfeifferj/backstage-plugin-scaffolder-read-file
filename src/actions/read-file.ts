@@ -27,7 +27,7 @@ export const readFileAction = () => {
 		},
 		async handler(ctx) {
 			try {
-				const defaultPath = resolvePath(ctx.workspacePath, 'generated');
+				const defaultPath = resolvePath(ctx.workspacePath);
 				const basePath = ctx.input.path
 					? resolvePath(ctx.workspacePath, ctx.input.path as string)
 					: defaultPath;
