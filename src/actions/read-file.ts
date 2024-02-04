@@ -6,30 +6,40 @@ import { resolveSafeChildPath } from '@backstage/backend-common';
 export const readFileAction = () => {
 	return createTemplateAction({
 		id: 'read:file',
-		description:
-			'Reads the content of a file and returns it. Defaults to the generated files directory if no path is supplied.',
+		description: 'Reads the content of a file and returns it.',
 		schema: {
 			input: {
 				type: 'object',
 				properties: {
+					filename: {
+						type: 'string',
+						description: 'The name of the file to read.',
+						minLength: 1,
+					},
 					path: {
 						type: 'string',
 						description:
-							'The path to the file to read. Optional - defaults to the generated files directory.',
+							'The optional path to the directory containing the file. Defaults to the "generated" directory if not provided.',
 					},
 				},
+				required: ['filename'],
 			},
 		},
 		async handler(ctx) {
 			try {
 				const defaultPath = resolvePath(ctx.workspacePath, 'generated');
-				const filePath = ctx.input.path
+				const basePath = ctx.input.path
 					? resolvePath(ctx.workspacePath, ctx.input.path as string)
 					: defaultPath;
+				const safeBasePath = resolveSafeChildPath(ctx.workspacePath, basePath);
 
-				const safeFilePath = resolveSafeChildPath(ctx.workspacePath, filePath);
+				const safeFilePath = resolvePath(
+					safeBasePath,
+					ctx.input.filename as string
+				);
+				const finalPath = resolveSafeChildPath(safeBasePath, safeFilePath);
 
-				const content = await fs.readFile(safeFilePath, 'utf8');
+				const content = await fs.readFile(finalPath, 'utf8');
 				ctx.output('content', content);
 			} catch (error) {
 				if (error instanceof Error) {
