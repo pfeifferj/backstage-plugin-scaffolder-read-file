@@ -48,6 +48,14 @@ export const readFileAction = () => {
 				const finalPath = resolveSafeChildPath(safeBasePath, safeFilePath);
 
 				const content = await fs.readFile(finalPath, 'utf8');
+
+				console.log(
+					`Type of content: ${typeof content}, Content preview: ${content.substring(
+						0,
+						100
+					)}`
+				);
+
 				ctx.output('content', content);
 			} catch (error) {
 				if (error instanceof Error) {
