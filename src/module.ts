@@ -2,7 +2,6 @@ import {
 	createBackendModule,
 	coreServices,
 } from '@backstage/backend-plugin-api';
-import { ScmIntegrations } from '@backstage/integration';
 import { scaffolderActionsExtensionPoint } from '@backstage/plugin-scaffolder-node/alpha';
 import { readFileAction } from './actions/read-file';
 
@@ -19,8 +18,7 @@ export const readFileModule = createBackendModule({
 				scaffolderActions: scaffolderActionsExtensionPoint,
 				config: coreServices.rootConfig,
 			},
-			async init({ scaffolderActions, config }) {
-				const integrations = ScmIntegrations.fromConfig(config);
+			async init({ scaffolderActions }) {
 				scaffolderActions.addActions(readFileAction());
 			},
 		});
